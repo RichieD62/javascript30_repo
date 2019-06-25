@@ -22,6 +22,22 @@
 
   <style>
 
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .h1 {
+      color: var(--base);
+    }
+
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +61,19 @@
   </style>
 
   <script>
+    var spaceSlider = document.querySelector("#spacing");
+    var blurSlider = document.querySelector("#blur");
+    var baseColorSlider = document.querySelector("#base");
+    var inputs = [spaceSlider, blurSlider, baseColorSlider];
+
+    function handleInputs() {
+      var suffix = this.dataset.sizing || "";
+      console.log(this.value)
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleInputs));
+    inputs.forEach(input => input.addEventListener('mousemove', handleInputs));
   </script>
 
 </body>
